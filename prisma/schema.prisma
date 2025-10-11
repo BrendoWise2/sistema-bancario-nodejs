@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String    @id @default(uuid())
+  name     String
+  email    String
+  password String
+  photo    String
+  accounts Account[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Account {
+  id               String        @id @default(uuid())
+  balance          Decimal
+  accountType      String
+  status           String
+  // Os campos de volta são criados automaticamente pelo Prisma
+  // para as relações nomeadas em 'Transaction'.
+  fromTransactions Transaction[] @relation("fromAccount")
+  toTransactions   Transaction[] @relation("toAccount")
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("accounts")
+}
+
+model Transaction {
+  id          String  @id @default(uuid())
+  amount      Decimal
+  type        String
+  description String
+
+  fromAccount   Account @relation("fromAccount", fields: [fromAccountId], references: [id])
+  fromAccountId String
+
+  toAccount   Account? @relation("toAccount", fields: [toAccountId], references: [id])
+  toAccountId String?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("transactions")
+}
