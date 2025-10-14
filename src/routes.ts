@@ -7,6 +7,7 @@ import { ListUserController } from "./controller/user/ListUserController";
 import { DetailUserController } from "./controller/user/DetailUserController";
 import { CreateAccountController } from "./controller/account/CreateAccountController";
 import { ListAccountsByUserController } from "./controller/account/ListAccountsByUserController";
+import { DepositController } from "./controller/transaction/DepositController";
 
 export const router = Router();
 
@@ -27,3 +28,6 @@ router.get('/detailUser', new DetailUserController().handle);
 //ACCOUNT
 router.post('/createAccounts', isAuthenticated, new CreateAccountController().handle);
 router.get('/userAccounts', isAuthenticated, new ListAccountsByUserController().handle);
+
+//TRANSACTION
+router.post('/transaction/deposit', new DepositController().handle);

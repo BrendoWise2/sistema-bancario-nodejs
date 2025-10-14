@@ -18,8 +18,6 @@ class ListAccountsByUserService {
                 balance: true,
                 accountType: true,
                 status: true,
-                fromTransactions: true,
-                toTransactions: true,
                 userId: true,
                 created_at: true,
                 updated_at: true,

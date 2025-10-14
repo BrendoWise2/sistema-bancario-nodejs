@@ -46,8 +46,8 @@ model Transaction {
   type        String
   description String
 
-  fromAccount   Account @relation("fromAccount", fields: [fromAccountId], references: [id])
-  fromAccountId String
+  fromAccount   Account? @relation("fromAccount", fields: [fromAccountId], references: [id])
+  fromAccountId String?
 
   toAccount   Account? @relation("toAccount", fields: [toAccountId], references: [id])
   toAccountId String?
