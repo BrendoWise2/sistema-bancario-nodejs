@@ -43,8 +43,8 @@ model Account {
 model Transaction {
   id          String  @id @default(uuid())
   amount      Decimal
-  type        String
-  description String
+  type        String?
+  description String?
 
   fromAccount   Account? @relation("fromAccount", fields: [fromAccountId], references: [id])
   fromAccountId String?

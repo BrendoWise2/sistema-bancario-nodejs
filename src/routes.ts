@@ -8,6 +8,8 @@ import { DetailUserController } from "./controller/user/DetailUserController";
 import { CreateAccountController } from "./controller/account/CreateAccountController";
 import { ListAccountsByUserController } from "./controller/account/ListAccountsByUserController";
 import { DepositController } from "./controller/transaction/DepositController";
+import { WithDrawalController } from "./controller/transaction/WithDrawalController";
+import { TransferController } from "./controller/transaction/TransferController";
 
 export const router = Router();
 
@@ -31,3 +33,5 @@ router.get('/userAccounts', isAuthenticated, new ListAccountsByUserController().
 
 //TRANSACTION
 router.post('/transaction/deposit', new DepositController().handle);
+router.post('/transaction/withDrawal', isAuthenticated, new WithDrawalController().handle);
+router.post('/transaction/transfer', isAuthenticated, new TransferController().handle);
