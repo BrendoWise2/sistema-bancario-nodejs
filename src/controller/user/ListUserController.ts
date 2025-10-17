@@ -10,7 +10,7 @@ class ListUserController {
 
         const user = await listUserService.execute()
 
-        res.json(user);
+        return res.status(200).json(user);
 
     }
 

@@ -4,7 +4,6 @@ import prismaClient from "../../prisma";
 
 interface TransferRequest {
     amount: Decimal;
-    type: string;
     fromAccountId: string;
     toAccountId: string;
 
@@ -12,7 +11,7 @@ interface TransferRequest {
 
 
 class TransferService {
-    async execute({ amount, type, fromAccountId, toAccountId }: TransferRequest) {
+    async execute({ amount, fromAccountId, toAccountId }: TransferRequest) {
 
         const accountToTransfer = await prismaClient.account.findUnique({
             where: {
@@ -42,7 +41,7 @@ class TransferService {
             const transaction = await tx.transaction.create({
                 data: {
                     amount: amount,
-                    type: type,
+                    type: "transfer",
                     fromAccountId: fromAccountId,
                     toAccountId: toAccountId,
                 }
@@ -72,7 +71,8 @@ class TransferService {
 
             return {
                 transaction: transaction,
-                account: withDrawal, deposit
+                source: withDrawal,
+                destination: deposit,
             }
 
         });

@@ -14,7 +14,7 @@ class AuthUserController {
             password
         })
 
-        return res.json(user);
+        return res.status(201).json(user);
 
     }
 

@@ -15,7 +15,7 @@ class DetailUserController {
             return res.status(401).end();
         }
 
-        return res.json(user);
+        return res.status(200).json(user);
     }
 
 }

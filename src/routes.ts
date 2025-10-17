@@ -10,6 +10,7 @@ import { ListAccountsByUserController } from "./controller/account/ListAccountsB
 import { DepositController } from "./controller/transaction/DepositController";
 import { WithDrawalController } from "./controller/transaction/WithDrawalController";
 import { TransferController } from "./controller/transaction/TransferController";
+import { GetTransactionController } from "./controller/transaction/GetTransactionController";
 
 export const router = Router();
 
@@ -35,3 +36,4 @@ router.get('/userAccounts', isAuthenticated, new ListAccountsByUserController().
 router.post('/transaction/deposit', new DepositController().handle);
 router.post('/transaction/withDrawal', isAuthenticated, new WithDrawalController().handle);
 router.post('/transaction/transfer', isAuthenticated, new TransferController().handle);
+router.get('/transaction/statement', isAuthenticated, new GetTransactionController().handle);
